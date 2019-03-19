@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+        name: db-deploy
+        namespace: kelnamespace
+        labels:
+            name: db-deploy
+
+spec:
+    #Number of Replicas
+    replicas: 1
+    selector:
+        matchLabels:
+            name: mydb-pod
+    template:
+        # The pod that I'm going to deploy
+        metadata:
+            name: mydb-pod
+            namespace: kelnamespace
+            labels:
+                name: mydb-pod
+                #project: workshop2
+        spec:
+            containers:
+            - name: mydb-container
+              image: stackupiss/northwind-db:v1
+              imagePullPolicy: IfNotPresent 
+              ports:
+              - containerPort: 3306
+
+---
+
+# Setup a Service
+apiVersion: v1
+kind: Service
+
+metadata:
+        name: mydb-svc
+        namespace: kelnamespace
+        labels:
+            name: mydb-svc
+
+spec:
+    type: ClusterIP
+    selector:
+        name: mydb-pod
+    ports:
+    - port: 3306
+      targetPort: 3306  
+        
+
+      
+      
+      
+      
+      
