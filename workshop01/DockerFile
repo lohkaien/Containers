@@ -1,0 +1,29 @@
+# Get Latest NodeJS Package
+FROM node:latest
+
+# Set the required Environment variables
+# Each line is one image - thus put in one line
+ENV DB_HOST-mydb DB_PORT-3306 
+ENV DB_USER=root DB_PASSWORD=changeit
+ENV APP_DIR=/app APP_PORT=3000
+
+# Create and cd into the directory
+WORKDIR = $APP_DIR
+
+# Add the required files and folders
+ADD config config
+ADD public public
+ADD views views
+ADD package-lock.json .
+ADD package.json .
+ADD main.js .
+
+# Install Libs
+RUN npm install
+
+# Expose Port
+EXPOSE ${APP_PORT}
+
+# Run Application
+ENTRYPOINT [ "node", "main.js" ]
+
