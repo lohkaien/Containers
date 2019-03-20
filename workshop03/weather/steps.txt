@@ -1,0 +1,20 @@
+(1) Kubernetes Deployment & Service Files
+- create deployment.yaml
+- run: kubectl apply -f deployment.yaml
+- create service.yaml
+- run: kubectl apply -f service.yaml
+- check: kubectl get po,svc -n default
+
+
+(2) Istio YAML Files
+- create service-entry.yaml
+- run: kubectl apply -f service-entry.yaml
+- create gateway.yaml
+- Obtain ingress gateway IP Address: kubectl get svc istio-ingressgateway -n istio-system
+- create gateway.yaml
+- run: kubectl apply -f gateway.yaml
+- create virtualservice.yaml
+- run: kubectl apply -f virtualservice.yaml
+- check: kubectl get po,svc -n default
+- check: kubectl get svc -n istio-system
+
