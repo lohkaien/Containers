@@ -1,0 +1,32 @@
+replicaCount: 1
+productionReplicaCount: 2
+
+image:
+  repository: balanus/weatherapp
+  tag: fixedv1
+  #repository: lohkaien/weatherapp
+  #tag: latest
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+ 
+deployment:
+    containerPort: 3000
+
+# Required in main.js
+APP_ID: d93717ff1611fdbc2cc9628b934cfb9a
+APP_DEFAULT_CITY: Japan
+
+environment: production
+productionEnv: true
+
+# Gateway Variables
+gatewayhostname: jp.165.227.242.247.nip.io
+gatewayport: 80
+domainNameSuffix: .165.227.242.247.nip.io

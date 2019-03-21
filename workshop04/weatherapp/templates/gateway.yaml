@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: {{ include "weatherapp.fullname" . }}
+  namespace: default
+spec:
+  selector:
+    istio: ingressgateway #controller
+  servers:
+  - hosts: 
+    #- {{ .Values.gatewayhostname }} #weatherapp.165.227.242.247.nip.io
+    - {{ .Release.Name }}{{ .Values.domainNameSuffix }}
+    port:
+      number: {{ .Values.gatewayport }}
+      protocol: HTTP
+      name: HTTP
